@@ -1,22 +1,47 @@
-from ultralytics import YOLO  
-import cv2  
+import cv2
+import os
+from django.conf import settings
+from ultralytics import YOLO
 
-model = YOLO("yolov8n.pt")  
+def detect_objects(video_url):
+    # Load YOLO model
+    model = YOLO("yolov8n.pt")  # Replace with your model path
+    
+    # Open the input video
+    cap = cv2.VideoCapture(video_url)
+    if not cap.isOpened():
+        raise ValueError("Could not open video file.")
 
-def detect_objects(video_url):  
-    cap = cv2.VideoCapture("https://res.cloudinary.com/dobfrs8nb/video/upload/v1742986345/VIDEO-2025-03-26-16-15-56_dntso3.mp4")  
+    # Prepare output video path in Django's media folder
+    output_filename = "processed_" + os.path.basename(video_url)
+    output_path = os.path.join(settings.MEDIA_ROOT, output_filename)
 
-    while cap.isOpened():  
-        ret, frame = cap.read()  
+    # Get video properties (for VideoWriter)
+    frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fps = int(cap.get(cv2.CAP_PROP_FPS))
+
+    # Initialize VideoWriter (H.264 codec)
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # or 'avc1' for H.264
+    out = cv2.VideoWriter(output_path, fourcc, fps, (frame_width, frame_height))
+
+    # Process each frame
+    while cap.isOpened():
+        ret, frame = cap.read()
         if not ret:
-            break  
+            break
 
-        results = model(frame)  
-        frame = results[0].plot()   
+        # Run YOLO detection
+        results = model(frame)
+        rendered_frame = results[0].plot()  # Get frame with bounding boxes
 
-        cv2.imshow("Drone Detection", frame)  
-        if cv2.waitKey(1) & 0xFF == ord('q'):  
-            break  
+        # Write the processed frame to output video
+        out.write(rendered_frame)
 
-    cap.release()  
-    cv2.destroyAllWindows()
+    # Release resources
+    cap.release()
+    out.release()
+
+    # Return the URL for the processed video
+    media_url = os.path.join(settings.MEDIA_ROOT, output_filename)
+    return {"status": "success", "output_url": media_url}
