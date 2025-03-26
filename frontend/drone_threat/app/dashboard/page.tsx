@@ -1,7 +1,11 @@
 "use client"
 import React, { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
-import { User, MapPin, Plane, Database, Play, ListVideo, Plus } from 'lucide-react';
+import { 
+  User, MapPin, Plane, Database, ListVideo, Plus, 
+  Battery, Signal, Cloud, Clock, Cpu, Router, 
+  ArrowUpRight, Target, Navigation, Wind 
+} from 'lucide-react';
 
 const DroneDashboard = () => {
   // Fetch user information from Clerk
@@ -16,6 +20,9 @@ const DroneDashboard = () => {
     battery: 85,
     speed: 12.5,
     altitude: 120,
+    signal: 92,
+    temperature: 28,
+    flightTime: 45,
     trajectory: [
       { lat: 37.7749, lng: -122.4194 },
       { lat: 37.7850, lng: -122.4074 },
@@ -44,16 +51,20 @@ const DroneDashboard = () => {
   const username = user?.fullName || user?.username || 'User';
 
   return (
-    <div className="bg-black text-white min-h-screen flex">
+    <div className="bg-gradient-to-br from-gray-900 to-black text-white min-h-screen flex">
       {/* Sidebar */}
-      <div className="w-72 bg-gray-900 flex flex-col">
+      <div className="w-80 bg-gray-800/60 backdrop-blur-sm flex flex-col border-r border-gray-700">
         {/* Product Name */}
-        <div className="p-4 border-b border-gray-800">
-          <h1 className="text-xl font-bold text-white">DroneTrack Pro</h1>
+        <div className="p-6 border-b border-gray-700 flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-white flex items-center">
+            <Router className="mr-2 text-blue-400" />
+            DroneTrack Pro
+          </h1>
+          <span className="text-sm bg-blue-600 px-2 py-1 rounded">Beta</span>
         </div>
 
         {/* Create New Feed Section */}
-        <div className="p-4 border-b border-gray-800">
+        <div className="p-6 border-b border-gray-700">
           <input 
             type="file" 
             id="feedUpload" 
@@ -63,37 +74,43 @@ const DroneDashboard = () => {
           />
           <label 
             htmlFor="feedUpload" 
-            className="bg-green-600 text-white px-3 py-2 rounded flex items-center cursor-pointer justify-center"
+            className="bg-blue-600 hover:bg-blue-700 transition-colors text-white px-4 py-3 rounded-lg flex items-center cursor-pointer justify-center shadow-lg"
           >
-            <Plus size={16} className="mr-2" />
+            <Plus size={20} className="mr-2" />
             Create New Feed
           </label>
         </div>
 
         {/* Feeds List */}
-        <div className="flex-grow overflow-y-auto">
-          <div className="p-4">
+        <div className="flex-grow overflow-y-auto p-4">
+          <div className="mb-4">
             <div className="flex items-center mb-4">
               <ListVideo className="mr-2 text-blue-500" />
-              <h2 className="text-lg">Feeds</h2>
+              <h2 className="text-lg font-semibold">Recent Feeds</h2>
             </div>
             {feeds.length === 0 ? (
-              <p className="text-gray-500 text-center">No feeds yet</p>
+              <div className="text-gray-400 text-center py-6 border border-dashed border-gray-600 rounded-lg">
+                <p>No feeds uploaded yet</p>
+                <p className="text-sm mt-2">Upload a video to get started</p>
+              </div>
             ) : (
               feeds.map((feed) => (
                 <div 
                   key={feed.id} 
-                  className={`mb-2 p-2 rounded cursor-pointer flex items-center ${
+                  className={`mb-3 p-3 rounded-lg cursor-pointer flex items-center transition-all duration-200 ${
                     selectedFeed?.id === feed.id 
-                    ? 'bg-blue-700' 
-                    : 'hover:bg-gray-800'
+                    ? 'bg-blue-700 scale-105' 
+                    : 'hover:bg-gray-700 hover:scale-[1.02]'
                   }`}
                   onClick={() => setSelectedFeed(feed)}
                 >
-                  <div className="w-12 h-8 bg-gray-700 rounded mr-2">
+                  <div className="w-16 h-12 bg-gray-700 rounded-md mr-3 overflow-hidden">
                     {/* Placeholder for video thumbnail */}
                   </div>
-                  <span className="truncate flex-grow">{feed.name}</span>
+                  <div className="flex-grow">
+                    <span className="truncate block font-medium">{feed.name}</span>
+                    <span className="text-xs text-gray-400">Recently Added</span>
+                  </div>
                 </div>
               ))
             )}
@@ -101,86 +118,113 @@ const DroneDashboard = () => {
         </div>
 
         {/* User Section */}
-        <div className="p-4 border-t border-gray-800 flex items-center">
+        <div className="p-6 border-t border-gray-700 flex items-center">
           {user?.imageUrl ? (
             <img 
               src={user.imageUrl} 
               alt="User profile" 
-              className="w-10 h-10 rounded-full mr-2"
+              className="w-12 h-12 rounded-full mr-4 border-2 border-blue-500"
             />
           ) : (
-            <User className="text-gray-400 hover:text-white cursor-pointer mr-2" />
+            <User className="text-gray-400 hover:text-white cursor-pointer mr-4 w-12 h-12" />
           )}
-          <span className="text-sm text-gray-300">{username}</span>
+          <div>
+            <span className="block text-sm font-semibold">{username}</span>
+            <span className="text-xs text-gray-400">Drone Operator</span>
+          </div>
         </div>
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-grow bg-black p-4 flex flex-col">
+      <div className="flex-grow bg-transparent p-6 flex flex-col">
         {/* Selected Feed Preview */}
         {selectedFeed && (
-          <div className="mb-4 bg-gray-800 rounded-lg p-4">
-            <h2 className="text-lg mb-2">Selected Feed</h2>
+          <div className="mb-6 bg-gray-800/60 backdrop-blur-sm rounded-xl p-6 shadow-xl">
+            <div className="flex items-center mb-4">
+              <Plane className="mr-2 text-green-500" />
+              <h2 className="text-xl font-semibold">Selected Feed</h2>
+            </div>
             <video 
               src={selectedFeed.videoURL} 
               controls 
-              className="w-full max-h-80 object-cover rounded"
+              className="w-full max-h-[500px] object-cover rounded-lg border-2 border-gray-700"
             />
           </div>
         )}
 
         {/* Center Content */}
-        <div className="flex-grow grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-6">
           {/* Google Maps Placeholder */}
-          <div className="bg-gray-800 rounded-lg p-4">
-            <div className="flex items-center mb-2">
+          <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-6 col-span-2 shadow-xl">
+            <div className="flex items-center mb-4">
               <MapPin className="mr-2 text-green-500" />
-              <h2 className="text-lg">Drone Location</h2>
+              <h2 className="text-xl font-semibold">Drone Location</h2>
             </div>
-            <div className="h-96 bg-gray-700 flex items-center justify-center">
+            <div className="h-[500px] bg-gray-700 rounded-lg flex items-center justify-center">
               Google Maps Placeholder
             </div>
           </div>
 
-          {/* Drone Data and Trajectory */}
-          <div className="flex flex-col">
-            {/* Drone Trajectory */}
-            <div className="bg-gray-800 rounded-lg p-4 mb-4">
-              <div className="flex items-center mb-2">
-                <Plane className="mr-2 text-blue-500" />
-                <h2 className="text-lg">Drone Trajectory</h2>
+          {/* Drone Statistics */}
+          <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-6 shadow-xl flex flex-col">
+            <div className="flex items-center mb-4">
+              <Database className="mr-2 text-purple-500" />
+              <h2 className="text-xl font-semibold">Drone Metrics</h2>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-gray-700 rounded-lg p-4 flex flex-col items-center">
+                <Battery className="text-blue-400 mb-2" />
+                <span className="text-sm text-gray-400">Battery</span>
+                <span className="font-bold text-lg">{selectedDrone.battery}%</span>
               </div>
-              <div className="h-48 bg-gray-700 rounded flex items-center justify-center">
-                Trajectory Visualization
+              <div className="bg-gray-700 rounded-lg p-4 flex flex-col items-center">
+                <Signal className="text-green-400 mb-2" />
+                <span className="text-sm text-gray-400">Signal</span>
+                <span className="font-bold text-lg">{selectedDrone.signal}%</span>
+              </div>
+              <div className="bg-gray-700 rounded-lg p-4 flex flex-col items-center">
+                <Cpu className="text-red-400 mb-2" />
+                <span className="text-sm text-gray-400">Speed</span>
+                <span className="font-bold text-lg">{selectedDrone.speed} m/s</span>
+              </div>
+              <div className="bg-gray-700 rounded-lg p-4 flex flex-col items-center">
+                <Wind className="text-yellow-400 mb-2" />
+                <span className="text-sm text-gray-400">Altitude</span>
+                <span className="font-bold text-lg">{selectedDrone.altitude} m</span>
+              </div>
+              <div className="bg-gray-700 rounded-lg p-4 flex flex-col items-center col-span-2">
+                <Navigation className="text-indigo-400 mb-2" />
+                <span className="text-sm text-gray-400">Flight Time</span>
+                <span className="font-bold text-lg">{selectedDrone.flightTime} min</span>
               </div>
             </div>
+          </div>
 
-            {/* Drone Details */}
-            <div className="bg-gray-800 rounded-lg p-4">
-              <div className="flex items-center mb-2">
-                <Database className="mr-2 text-purple-500" />
-                <h2 className="text-lg">Drone Details</h2>
+          {/* Trajectory and Additional Stats */}
+          <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-6 col-span-2 shadow-xl">
+            <div className="flex items-center mb-4">
+              <Target className="mr-2 text-blue-500" />
+              <h2 className="text-xl font-semibold">Flight Trajectory</h2>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="h-48 bg-gray-700 rounded-lg flex items-center justify-center">
+                Trajectory Visualization
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <p className="text-gray-400">Drone ID</p>
-                  <p>{selectedDrone.id}</p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-700 rounded-lg p-4 flex flex-col justify-center">
+                  <span className="text-sm text-gray-400">Avg. Speed</span>
+                  <span className="font-bold text-lg flex items-center">
+                    12.3 m/s 
+                    <ArrowUpRight className="text-green-500 ml-2" size={16} />
+                  </span>
                 </div>
-                <div>
-                  <p className="text-gray-400">Status</p>
-                  <p className="text-green-500">{selectedDrone.status}</p>
+                <div className="bg-gray-700 rounded-lg p-4 flex flex-col justify-center">
+                  <span className="text-sm text-gray-400">Temp</span>
+                  <span className="font-bold text-lg">{selectedDrone.temperature}°C</span>
                 </div>
-                <div>
-                  <p className="text-gray-400">Battery</p>
-                  <p>{selectedDrone.battery}%</p>
-                </div>
-                <div>
-                  <p className="text-gray-400">Speed</p>
-                  <p>{selectedDrone.speed} m/s</p>
-                </div>
-                <div>
-                  <p className="text-gray-400">Altitude</p>
-                  <p>{selectedDrone.altitude} m</p>
+                <div className="bg-gray-700 rounded-lg p-4 flex flex-col justify-center col-span-2">
+                  <span className="text-sm text-gray-400">Total Distance</span>
+                  <span className="font-bold text-lg">3.5 km</span>
                 </div>
               </div>
             </div>
