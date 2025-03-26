@@ -124,7 +124,7 @@ const Navbar = () => {
                 <div className="flex space-x-2">
                   <SignInButton mode="modal">
                     <Button variant="outline" size="sm">
-                      <LogIn className="mr-2 h-4 w-4" /> Sign In
+                      <LogIn className="mr-2 h-4 w-4 text-black" /> <span className='text-black'> Sign In</span>
                     </Button>
                   </SignInButton>
                   <SignUpButton mode="modal">
