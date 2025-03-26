@@ -1,0 +1,59 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+*.venv/
+
+# Django-specific
+*.log
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+local_settings.py
+
+# Migrations (optional: keep them if tracking database schema changes)
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# Environment variables
+.env
+*.env
+
+# Pytest and coverage
+.coverage
+htmlcov/
+.cache
+pytest_cache/
+
+# MyPy and Type Checking
+.mypy_cache/
+.dmypy.json
+.pyre/
+
+# VSCode settings
+.vscode/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+
+# Redis
+dump.rdb
+
+# MacOS
+.DS_Store
+
+# Other IDE files
+.idea/
