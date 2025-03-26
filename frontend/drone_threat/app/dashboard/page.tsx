@@ -1,11 +1,19 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { 
   User, MapPin, Plane, Database, ListVideo, Plus, 
-  Battery, Signal, Cloud, Clock, Cpu, Router, 
-  ArrowUpRight, Target, Navigation, Wind 
+  Battery, Signal, CloudCog, Clock, Cpu, Router, 
+  ArrowUpRight, Target, Navigation, Wind, Thermometer,
+  Compass, RadioTower, Waves
 } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import Leaflet to avoid SSR issues
+const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
+const TileLayer = dynamic(() => import('react-leaflet').then(mod => mod.TileLayer), { ssr: false });
+const Marker = dynamic(() => import('react-leaflet').then(mod => mod.Marker), { ssr: false });
+const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ssr: false });
 
 const DroneDashboard = () => {
   // Fetch user information from Clerk
@@ -23,12 +31,31 @@ const DroneDashboard = () => {
     signal: 92,
     temperature: 28,
     flightTime: 45,
+    windSpeed: 3.2,
+    humidity: 45,
     trajectory: [
       { lat: 37.7749, lng: -122.4194 },
       { lat: 37.7850, lng: -122.4074 },
       { lat: 37.7920, lng: -122.4030 }
-    ]
+    ],
+    currentLocation: { lat: 37.7749, lng: -122.4194 }
   });
+
+  // Optional: Update drone location periodically (simulated)
+  useEffect(() => {
+    const locationUpdateInterval = setInterval(() => {
+      // Simulate slight movement of drone
+      setSelectedDrone(prev => ({
+        ...prev,
+        currentLocation: {
+          lat: prev.currentLocation.lat + (Math.random() - 0.5) * 0.01,
+          lng: prev.currentLocation.lng + (Math.random() - 0.5) * 0.01
+        }
+      }));
+    }, 5000);
+
+    return () => clearInterval(locationUpdateInterval);
+  }, []);
 
   // Handle creating a new feed
   const handleCreateNewFeed = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,14 +80,14 @@ const DroneDashboard = () => {
   return (
     <div className="bg-gradient-to-br from-gray-900 to-black text-white min-h-screen flex">
       {/* Sidebar */}
-      <div className="w-80 bg-gray-800/60 backdrop-blur-sm flex flex-col border-r border-gray-700">
+      <div className="w-96 bg-gray-800/70 backdrop-blur-sm flex flex-col border-r border-gray-700 shadow-2xl">
         {/* Product Name */}
         <div className="p-6 border-b border-gray-700 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-white flex items-center">
             <Router className="mr-2 text-blue-400" />
             DroneTrack Pro
           </h1>
-          <span className="text-sm bg-blue-600 px-2 py-1 rounded">Beta</span>
+          <span className="text-sm bg-green-600 px-2 py-1 rounded">v1.2</span>
         </div>
 
         {/* Create New Feed Section */}
@@ -152,16 +179,35 @@ const DroneDashboard = () => {
           </div>
         )}
 
-        {/* Center Content */}
+        {/* Content Grid */}
         <div className="grid grid-cols-3 gap-6">
-          {/* Google Maps Placeholder */}
+          {/* Drone Location Map */}
           <div className="bg-gray-800/60 backdrop-blur-sm rounded-xl p-6 col-span-2 shadow-xl">
             <div className="flex items-center mb-4">
               <MapPin className="mr-2 text-green-500" />
               <h2 className="text-xl font-semibold">Drone Location</h2>
             </div>
-            <div className="h-[500px] bg-gray-700 rounded-lg flex items-center justify-center">
-              Google Maps Placeholder
+            <div className="h-[500px] bg-gray-700 rounded-lg overflow-hidden">
+              {typeof window !== 'undefined' && (
+                <MapContainer 
+                  center={[selectedDrone.currentLocation.lat, selectedDrone.currentLocation.lng]} 
+                  zoom={13} 
+                  scrollWheelZoom={false}
+                  className="h-full w-full"
+                >
+                  <TileLayer
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  />
+                  <Marker position={[selectedDrone.currentLocation.lat, selectedDrone.currentLocation.lng]}>
+                    <Popup>
+                      Drone Location<br />
+                      Lat: {selectedDrone.currentLocation.lat.toFixed(4)}<br />
+                      Lng: {selectedDrone.currentLocation.lng.toFixed(4)}
+                    </Popup>
+                  </Marker>
+                </MapContainer>
+              )}
             </div>
           </div>
 
@@ -192,6 +238,16 @@ const DroneDashboard = () => {
                 <span className="text-sm text-gray-400">Altitude</span>
                 <span className="font-bold text-lg">{selectedDrone.altitude} m</span>
               </div>
+              <div className="bg-gray-700 rounded-lg p-4 flex flex-col items-center">
+                <Thermometer className="text-orange-400 mb-2" />
+                <span className="text-sm text-gray-400">Temp</span>
+                <span className="font-bold text-lg">{selectedDrone.temperature}°C</span>
+              </div>
+              <div className="bg-gray-700 rounded-lg p-4 flex flex-col items-center">
+                <Waves className="text-cyan-400 mb-2" />
+                <span className="text-sm text-gray-400">Wind</span>
+                <span className="font-bold text-lg">{selectedDrone.windSpeed} m/s</span>
+              </div>
               <div className="bg-gray-700 rounded-lg p-4 flex flex-col items-center col-span-2">
                 <Navigation className="text-indigo-400 mb-2" />
                 <span className="text-sm text-gray-400">Flight Time</span>
@@ -219,8 +275,8 @@ const DroneDashboard = () => {
                   </span>
                 </div>
                 <div className="bg-gray-700 rounded-lg p-4 flex flex-col justify-center">
-                  <span className="text-sm text-gray-400">Temp</span>
-                  <span className="font-bold text-lg">{selectedDrone.temperature}°C</span>
+                  <span className="text-sm text-gray-400">Humidity</span>
+                  <span className="font-bold text-lg">{selectedDrone.humidity}%</span>
                 </div>
                 <div className="bg-gray-700 rounded-lg p-4 flex flex-col justify-center col-span-2">
                   <span className="text-sm text-gray-400">Total Distance</span>
