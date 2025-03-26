@@ -18,7 +18,7 @@ import {
 
 const CyberDroneSecurity = () => {
   const canvasRef = useRef(null);
-  const [activeFeature, setActiveFeature] = useState(null);
+  const [activeFeature, setActiveFeature] = useState<number | null>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
