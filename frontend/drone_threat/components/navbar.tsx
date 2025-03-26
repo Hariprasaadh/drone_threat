@@ -2,16 +2,13 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Shield, Menu, X, LogIn, UserCircle } from 'lucide-react';
+import { Shield, Menu, X, LogIn, UserCircle, MapPin, Plane, Video } from 'lucide-react';
 import { SignInButton, SignUpButton, UserButton, useUser, SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from 'next/link';
 
 const NavLinks = [
   { href: '/', label: 'Home' },
-  { href: '/features', label: 'Features' },
-  { href: '/technology', label: 'Technology' },
-  { href: '/solutions', label: 'Solutions' },
-  { href: '/contact', label: 'Contact' }
+  { href: '/dashboard', label: 'Dashboard' },
 ];
 
 const Navbar = () => {
@@ -84,17 +81,17 @@ const Navbar = () => {
             variants={sidebarVariants}
             className="fixed top-0 left-0 w-80 h-full bg-gradient-to-br from-black via-gray-900 to-blue-900 shadow-2xl z-40 overflow-y-auto"
           >
-            <div className="p-6 space-y-8">
-              {/* Logo Section */}
-              <div className="flex items-center space-x-3 mb-12">
+            <div className="p-6 space-y-8 h-full flex flex-col">
+              {/* Logo Section - Moved to Top Right */}
+              <div className="flex justify-end items-center space-x-3">
+                <h2 className="text-2xl font-bold text-white">DroneShield</h2>
                 <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
                   <Shield className="w-5 h-5 text-gray-300" />
                 </div>
-                <h2 className="text-2xl font-bold text-white">DroneShield</h2>
               </div>
 
               {/* Navigation Links */}
-              <nav className="space-y-4">
+              <nav className="space-y-4 flex-grow">
                 {NavLinks.map((link, index) => (
                   <motion.div
                     key={link.href}
@@ -118,10 +115,33 @@ const Navbar = () => {
                     </Link>
                   </motion.div>
                 ))}
+
+                {/* Feed Section */}
+                <div className="mt-6">
+                  <h3 className="text-lg font-semibold text-white mb-4">Feeds</h3>
+                  <Button variant="outline" className="w-full mb-2">
+                    <Video className="mr-2 h-4 w-4" /> Create New Feed
+                  </Button>
+                </div>
+
+                {/* Drone Details */}
+                <div className="mt-6">
+                  <h3 className="text-lg font-semibold text-white mb-4">Drone Details</h3>
+                  <div className="bg-white/5 p-4 rounded-lg">
+                    <div className="flex items-center mb-2">
+                      <MapPin className="mr-2 h-4 w-4 text-gray-300" />
+                      <span className="text-gray-300">Current Location</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Plane className="mr-2 h-4 w-4 text-gray-300" />
+                      <span className="text-gray-300">Trajectory Data</span>
+                    </div>
+                  </div>
+                </div>
               </nav>
 
-              {/* Authentication Section */}
-              <div className="mt-12">
+              {/* Authentication Section - Bottom of Sidebar */}
+              <div className="mt-auto pb-6">
                 <SignedOut>
                   <div className="space-y-4">
                     <SignInButton mode="modal">
@@ -137,8 +157,9 @@ const Navbar = () => {
                   </div>
                 </SignedOut>
                 <SignedIn>
-                  <div className="flex justify-center">
+                  <div className="flex flex-col items-center space-y-2">
                     <UserButton afterSignOutUrl="/" />
+                    <span className="text-white">{user?.fullName || 'User'}</span>
                   </div>
                 </SignedIn>
               </div>
