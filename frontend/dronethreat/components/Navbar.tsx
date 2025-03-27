@@ -1,88 +1,45 @@
-'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Shield, Menu, Moon, Sun } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { UserButton, SignInButton, useUser } from '@clerk/nextjs';
+import React, { useEffect, useState } from 'react';
+import { Shield } from 'lucide-react';
 
-interface NavbarProps {
-  toggleSidebar: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
-  const router = useRouter();
-  const { isSignedIn, user } = useUser();
-  const [currentTime, setCurrentTime] = useState(new Date());
-  const [darkMode, setDarkMode] = useState(true);
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      if (offset > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
 
-    return () => clearInterval(interval);
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border h-16 flex items-center px-4 md:px-6">
-      <div className="flex items-center justify-between w-full">
-        <div className="flex items-center space-x-4">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleSidebar}
-            className="md:hidden"
-            aria-label="Toggle Sidebar"
-          >
-            <Menu className="h-5 w-5" />
-          </Button>
-
-          <Link href="/" className="flex items-center space-x-3">
-            <Shield className="h-6 w-6 text-primary" />
-            <span className="font-semibold text-lg tracking-tight">ThreatScout</span>
-          </Link>
-        </div>
-
-        <div className="flex items-center space-x-4">
-          <span className="text-sm font-medium">{currentTime.toLocaleTimeString()}</span>
-
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setDarkMode((prev) => !prev)}
-            aria-label="Toggle Dark Mode"
-          >
-            {darkMode ? <Sun className="h-5 w-5 text-yellow-500" /> : <Moon className="h-5 w-5 text-gray-700" />}
-          </Button>
-
-         
-
-          {isSignedIn ? (
-            // If user is signed in, show UserButton
-            <div className="flex items-center space-x-3">
-              <div className="hidden md:block text-right">
-                <p className="text-sm font-medium">{user?.fullName || 'User'}</p>
-                <p className="text-xs text-muted-foreground">{user?.emailAddresses[0]?.emailAddress}</p>
-              </div>
-              <UserButton afterSignOutUrl="/" />
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 lg:px-12 py-4 ${
+        scrolled ? 'backdrop-blur-lg bg-black/70 shadow-lg' : 'bg-transparent'
+      }`}
+    >
+      <div className="container mx-auto">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="bg-drone-blue/20 p-1.5 rounded-lg">
+              <Shield className="w-5 h-5 text-drone-blue" />
             </div>
-          ) : (
-            // If user is not signed in, show Sign In button
-            <SignInButton mode="modal">
-              <Button variant="default">Sign In</Button>
-            </SignInButton>
-          )}
+            <span className="text-lg font-semibold">DroneThreat</span>
+          </div>
+        
+          <button className="bg-drone-blue/10 border border-drone-blue/20 text-drone-blue px-5 py-2 rounded-full text-sm font-medium hover:bg-drone-blue/20 transition-all duration-300"
+          onClick={() => window.location.href = '/dashboard'}>  
+            Dashboard
+          </button>
         </div>
       </div>
     </header>

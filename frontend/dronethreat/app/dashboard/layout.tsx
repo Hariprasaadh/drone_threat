@@ -1,7 +1,7 @@
 "use client"; // Ensure client-side state works
 
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/DasNavbar";
 import Sidebar from "@/components/Sidebar";
 
 export default function RootLayout({
