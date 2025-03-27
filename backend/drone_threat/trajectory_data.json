@@ -1,0 +1,340 @@
+[
+  {
+    "timestamp": 0.52,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 449,
+        "y": 300,
+        "speed_kmph": 3.319657374463584,
+        "is_malicious": false,
+        "confidence": 0.848924458026886
+      }
+    ]
+  },
+  {
+    "timestamp": 1.04,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 482,
+        "y": 285,
+        "speed_kmph": 3.5931911261216363,
+        "is_malicious": true,
+        "confidence": 0.8428266644477844
+      }
+    ]
+  },
+  {
+    "timestamp": 1.56,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 454,
+        "y": 293,
+        "speed_kmph": 1.8132019127948316,
+        "is_malicious": true,
+        "confidence": 0.8360649943351746
+      }
+    ]
+  },
+  {
+    "timestamp": 2.08,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 443,
+        "y": 276,
+        "speed_kmph": 2.776162207127271,
+        "is_malicious": true,
+        "confidence": 0.8395045399665833
+      }
+    ]
+  },
+  {
+    "timestamp": 2.6,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 446,
+        "y": 262,
+        "speed_kmph": 2.268018531382876,
+        "is_malicious": true,
+        "confidence": 0.8150485754013062
+      }
+    ]
+  },
+  {
+    "timestamp": 3.12,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 435,
+        "y": 261,
+        "speed_kmph": 1.5177206889461128,
+        "is_malicious": true,
+        "confidence": 0.847802460193634
+      }
+    ]
+  },
+  {
+    "timestamp": 3.64,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 426,
+        "y": 256,
+        "speed_kmph": 1.6759369620151676,
+        "is_malicious": true,
+        "confidence": 0.8464421033859253
+      }
+    ]
+  },
+  {
+    "timestamp": 4.16,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 462,
+        "y": 274,
+        "speed_kmph": 3.7560395590099596,
+        "is_malicious": true,
+        "confidence": 0.5245072841644287
+      }
+    ]
+  },
+  {
+    "timestamp": 4.68,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 454,
+        "y": 284,
+        "speed_kmph": 2.1429408510188663,
+        "is_malicious": true,
+        "confidence": 0.5878272652626038
+      }
+    ]
+  },
+  {
+    "timestamp": 5.2,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 462,
+        "y": 289,
+        "speed_kmph": 1.1042603910181952,
+        "is_malicious": true,
+        "confidence": 0.5777139663696289
+      }
+    ]
+  },
+  {
+    "timestamp": 5.72,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 439,
+        "y": 285,
+        "speed_kmph": 2.1840852919291196,
+        "is_malicious": true,
+        "confidence": 0.5901113152503967
+      }
+    ]
+  },
+  {
+    "timestamp": 6.24,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 423,
+        "y": 274,
+        "speed_kmph": 2.618166266064987,
+        "is_malicious": true,
+        "confidence": 0.7053293585777283
+      }
+    ]
+  },
+  {
+    "timestamp": 6.76,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 436,
+        "y": 269,
+        "speed_kmph": 2.708527134961528,
+        "is_malicious": true,
+        "confidence": 0.38441911339759827
+      }
+    ]
+  },
+  {
+    "timestamp": 7.28,
+    "drones": [
+      {
+        "track_id": 1,
+        "x": 431,
+        "y": 254,
+        "speed_kmph": 1.970545029096872,
+        "is_malicious": true,
+        "confidence": 0.6334439516067505
+      }
+    ]
+  },
+  {
+    "timestamp": 7.8,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 436,
+        "y": 322,
+        "speed_kmph": 2.6703625556147155,
+        "is_malicious": false,
+        "confidence": 0.8756967186927795
+      }
+    ]
+  },
+  {
+    "timestamp": 8.32,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 428,
+        "y": 304,
+        "speed_kmph": 2.667172924499897,
+        "is_malicious": true,
+        "confidence": 0.8275102376937866
+      }
+    ]
+  },
+  {
+    "timestamp": 8.84,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 420,
+        "y": 283,
+        "speed_kmph": 3.155761464333575,
+        "is_malicious": true,
+        "confidence": 0.7359153032302856
+      }
+    ]
+  },
+  {
+    "timestamp": 9.36,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 421,
+        "y": 268,
+        "speed_kmph": 2.3007565994500334,
+        "is_malicious": true,
+        "confidence": 0.8702139854431152
+      }
+    ]
+  },
+  {
+    "timestamp": 9.88,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 428,
+        "y": 268,
+        "speed_kmph": 1.1253017400492584,
+        "is_malicious": true,
+        "confidence": 0.8208924531936646
+      }
+    ]
+  },
+  {
+    "timestamp": 10.4,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 470,
+        "y": 272,
+        "speed_kmph": 2.9839536273809237,
+        "is_malicious": true,
+        "confidence": 0.7775121927261353
+      }
+    ]
+  },
+  {
+    "timestamp": 10.92,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 478,
+        "y": 290,
+        "speed_kmph": 2.986947538747006,
+        "is_malicious": true,
+        "confidence": 0.7118949890136719
+      }
+    ]
+  },
+  {
+    "timestamp": 11.44,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 553,
+        "y": 316,
+        "speed_kmph": 8.037708487370471,
+        "is_malicious": false,
+        "confidence": 0.797059178352356
+      }
+    ]
+  },
+  {
+    "timestamp": 11.96,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 653,
+        "y": 336,
+        "speed_kmph": 13.322151205045163,
+        "is_malicious": false,
+        "confidence": 0.8402300477027893
+      }
+    ]
+  },
+  {
+    "timestamp": 12.48,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 753,
+        "y": 335,
+        "speed_kmph": 15.261415354905221,
+        "is_malicious": false,
+        "confidence": 0.6014885902404785
+      }
+    ]
+  },
+  {
+    "timestamp": 13.0,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 780,
+        "y": 352,
+        "speed_kmph": 8.997542177364295,
+        "is_malicious": true,
+        "confidence": 0.5267756581306458
+      }
+    ]
+  },
+  {
+    "timestamp": 13.52,
+    "drones": [
+      {
+        "track_id": 4,
+        "x": 813,
+        "y": 410,
+        "speed_kmph": 8.765891189743604,
+        "is_malicious": false,
+        "confidence": 0.4933300018310547
+      }
+    ]
+  }
+]
