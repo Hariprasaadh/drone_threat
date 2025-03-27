@@ -20,7 +20,7 @@
         "x": 482,
         "y": 285,
         "speed_kmph": 3.5931911261216363,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.8428266644477844
       }
     ]
@@ -33,7 +33,7 @@
         "x": 454,
         "y": 293,
         "speed_kmph": 1.8132019127948316,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.8360649943351746
       }
     ]
@@ -46,7 +46,7 @@
         "x": 443,
         "y": 276,
         "speed_kmph": 2.776162207127271,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.8395045399665833
       }
     ]
@@ -85,7 +85,7 @@
         "x": 426,
         "y": 256,
         "speed_kmph": 1.6759369620151676,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.8464421033859253
       }
     ]
@@ -98,7 +98,7 @@
         "x": 462,
         "y": 274,
         "speed_kmph": 3.7560395590099596,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.5245072841644287
       }
     ]
@@ -111,7 +111,7 @@
         "x": 454,
         "y": 284,
         "speed_kmph": 2.1429408510188663,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.5878272652626038
       }
     ]
@@ -124,7 +124,7 @@
         "x": 462,
         "y": 289,
         "speed_kmph": 1.1042603910181952,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.5777139663696289
       }
     ]
@@ -137,7 +137,7 @@
         "x": 439,
         "y": 285,
         "speed_kmph": 2.1840852919291196,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.5901113152503967
       }
     ]
@@ -150,7 +150,7 @@
         "x": 423,
         "y": 274,
         "speed_kmph": 2.618166266064987,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.7053293585777283
       }
     ]
@@ -163,7 +163,7 @@
         "x": 436,
         "y": 269,
         "speed_kmph": 2.708527134961528,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.38441911339759827
       }
     ]
@@ -176,7 +176,7 @@
         "x": 431,
         "y": 254,
         "speed_kmph": 1.970545029096872,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.6334439516067505
       }
     ]
@@ -202,7 +202,7 @@
         "x": 428,
         "y": 304,
         "speed_kmph": 2.667172924499897,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.8275102376937866
       }
     ]
@@ -215,7 +215,7 @@
         "x": 420,
         "y": 283,
         "speed_kmph": 3.155761464333575,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.7359153032302856
       }
     ]
@@ -241,7 +241,7 @@
         "x": 428,
         "y": 268,
         "speed_kmph": 1.1253017400492584,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.8208924531936646
       }
     ]
@@ -254,7 +254,7 @@
         "x": 470,
         "y": 272,
         "speed_kmph": 2.9839536273809237,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.7775121927261353
       }
     ]
@@ -267,7 +267,7 @@
         "x": 478,
         "y": 290,
         "speed_kmph": 2.986947538747006,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.7118949890136719
       }
     ]
@@ -319,7 +319,7 @@
         "x": 780,
         "y": 352,
         "speed_kmph": 8.997542177364295,
-        "is_malicious": false,
+        "is_malicious": true,
         "confidence": 0.5267756581306458
       }
     ]
