@@ -1,6 +1,6 @@
 # 🛡️ Drone Threat Detection & Classification
 
-![Project Banner](https://via.placeholder.com/1200x400.png?text=Drone+Threat+Detection+%26+Classification)
+![Project Banner](images/landing-page.jpg)
 
 ## 🚀 Overview
 
@@ -36,16 +36,10 @@ The AI Drone Threat Classifier is a real-time drone detection, tracking, and cla
 ## 🖼️ Screenshots
 
 ### 🎯 Real-Time Drone Tracking
-![Real-Time Tracking](https://via.placeholder.com/800x400.png?text=Real-Time+Tracking)
+![Real-Time Tracking](images/output.gif)
 
-### 🌍 Map Integration
-![Live Map](https://via.placeholder.com/800x400.png?text=Live+Map+Integration)
-
-### 🛰️ 3D Trajectory Visualization
-![3D Trajectory](https://via.placeholder.com/800x400.png?text=3D+Trajectory+Visualization)
-
-### 🔗 Blockchain Logging
-![Blockchain Data](https://via.placeholder.com/800x400.png?text=Blockchain+Data)
+### 🔗 Analysis
+![Analysis Data](images/dashboard.jpg)
 
 ## 🏗️ Tech Stack
 
